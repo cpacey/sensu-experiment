@@ -1,0 +1,28 @@
+{
+  "rabbitmq": {
+    "host": "rabbitmq",
+    "port": 5671,
+    "vhost": "/",
+    "user": "guest",
+    "password": "guest",
+    "ssl": {
+      "cert_chain_file": "/etc/sensu/ssl/cert.pem",
+      "private_key_file": "/etc/sensu/ssl/key.pem"
+    }
+  },
+  "client": {
+    "name": "standalonehttp",
+    "address": "standalonehttp",
+    "subscriptions": [ "production", "server" ]
+  },
+  "checks": {
+    "standalone_http_get": {
+      "type": "metric",
+      "command": "/usr/local/bin/check-http-json.rb -u \"$URL\" -h \"Authorization: Bearer $BEARER_TOKEN\"",
+      "subscribers": [ "production" ],
+      "standalone": true,
+      "interval": 10,
+      "handler": "debug"
+    }
+  }
+}

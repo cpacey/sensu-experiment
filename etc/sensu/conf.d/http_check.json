@@ -1,0 +1,13 @@
+{
+  "checks": {
+    "http_get": {
+      "type": "metric",
+      "command": "/usr/local/bin/check-http-json.rb -u \"$URL\" -h \"Authorization: Bearer $BEARER_TOKEN\"",
+      "subscribers": [
+        "http"
+      ],
+      "interval": 10,
+      "handler": "debug"
+    }
+  }
+}

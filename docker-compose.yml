@@ -21,6 +21,28 @@ cpuagent:
   links:
     - rabbitmq
 
+httpagent:
+  build: ./http-agent
+  restart: always
+  environment:
+    - URL=http://deviceregistry.iot.dev.cantireinnovations.com/
+    - BEARER_TOKEN=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOiJ0ZXN0IiwiaWF0IjoxNDQ0MTUzOTkwLCJhdWQiOiJjdGkuaW90IiwiaXNzIjoiY3RpLm9hdXRoIn0.u8xX8FqYlj4BDwZUt3n6s6lH_yorxAtyoMRuN4igq6o
+  volumes:
+    - "./etc/http-agent:/etc/sensu"
+  links:
+    - rabbitmq
+
+standalone:
+  build: ./http-agent
+  restart: always
+  environment:
+    - URL=http://deviceregistry.iot.dev.cantireinnovations.com/
+    - BEARER_TOKEN=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOiJ0ZXN0IiwiaWF0IjoxNDQ0MTUzOTkwLCJhdWQiOiJjdGkuaW90IiwiaXNzIjoiY3RpLm9hdXRoIn0.u8xX8FqYlj4BDwZUt3n6s6lH_yorxAtyoMRuN4igq6o
+  volumes:
+    - "./etc/standalone-http-agent:/etc/sensu"
+  links:
+    - rabbitmq
+
 rabbitmqagent:
   build: ./rabbit-agent
   restart: always

@@ -13,4 +13,8 @@ RUN \
   gem install sensu-plugin --no-rdoc --no-ri && \
   rm -rf /var/lib/apt/lists/*
 
-CMD /opt/sensu/bin/sensu-client -c /etc/sensu/config.json
+ADD http://sensuapp.org/docs/0.20/files/check-memory.sh /opt/sensu/plugins/check-memory.sh
+RUN chmod +x /opt/sensu/plugins/check-memory.sh
+
+RUN chown -R sensu:sensu /etc/sensu
+CMD [ "/opt/sensu/bin/sensu-client", "-v", "-c", "/etc/sensu/config.json" ]
