@@ -1,5 +1,6 @@
 sensu:
   build: ./sensu
+  restart: always
   volumes: 
     - "./etc/sensu:/etc/sensu"
   environment:
@@ -8,13 +9,21 @@ sensu:
   ports:
     - "3000:3000"
     - "4567:4567"
-
   links:
     - rabbitmq
     - redis
 
+cpuagent:
+  build: ./cpu-agent
+  restart: always
+  volumes:
+    - "./etc/cpu-agent:/etc/sensu"
+  links:
+    - rabbitmq
+
 rabbitmqagent:
   build: ./rabbit-agent
+  restart: always
   volumes: 
     - "./etc/rabbit-agent:/etc/sensu"
   links:
@@ -23,6 +32,7 @@ rabbitmqagent:
 rabbitmq:
   hostname: rabbitmq
   image: rabbitmq:3.4.4-management
+  restart: always
   volumes:
     - "./etc/rabbitmq:/etc/rabbitmq"
     - "./local/rabbit:/data"
@@ -34,5 +44,7 @@ rabbitmq:
 
 redis:
   image: redis:2.8.19
+  restart: always
   ports:
     - "6379:6379"
+

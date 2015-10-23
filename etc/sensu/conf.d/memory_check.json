@@ -1,0 +1,13 @@
+{
+  "checks": {
+    "memory_check": {
+      "type": "metric",
+      "command": "/etc/sensu/plugins/check-memory.sh",
+      "subscribers": [
+        "server"
+      ],
+      "interval": 10,
+      "handler": "debug"
+    }
+  }
+}
