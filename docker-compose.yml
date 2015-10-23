@@ -70,3 +70,18 @@ redis:
   ports:
     - "6379:6379"
 
+sensuhttpcheck:
+  image: sensu-http-check
+  restart: always
+  environment:
+    - CLIENT_NAME=sensu-http-check
+    - RABBITMQ_HOST=rabbitmq
+    - RABBITMQ_PORT=5671
+    - RABBITMQ_VHOST=/
+    - RABBITMQ_USER=guest
+    - RABBITMQ_PASS=guest
+    - URL=http://deviceregistry.iot.dev.cantireinnovations.com/
+  volumes:
+    - "./etc/standalone-http-agent/ssl/:/etc/sensu/ssl/"
+  links:
+    - rabbitmq
