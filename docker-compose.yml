@@ -71,7 +71,7 @@ redis:
     - "6379:6379"
 
 sensuhttpcheck:
-  image: sensu-http-check
+  image: cantireinnovations/sensu-http-check:v1.0.0
   restart: always
   environment:
     - CLIENT_NAME=sensu-http-check
