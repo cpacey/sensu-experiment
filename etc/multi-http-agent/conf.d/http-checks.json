@@ -1,0 +1,26 @@
+{
+  "checks": {
+
+    "device-registry-http-check": {
+      "type": "metric",
+      "command": "/opt/sensu-http-check/bin/sensu-http-check --url http://deviceregistry.iot.dev.cantireinnovations.com/",
+      "subscribers": [
+        "production"
+      ],
+      "standalone": true,
+      "interval": 10,
+      "handler": "default"
+    },
+
+    "noma-lights-http-check": {
+      "type": "metric",
+      "command": "/opt/sensu-http-check/bin/sensu-http-check --url http://nomalights.iot.dev.cantireinnovations.com/ --httpAuthorizationScheme jwt",
+      "subscribers": [
+        "production"
+      ],
+      "standalone": true,
+      "interval": 10,
+      "handler": "default"
+    }
+  }
+}

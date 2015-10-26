@@ -85,3 +85,23 @@ sensuhttpcheck:
     - "./etc/standalone-http-agent/ssl/:/etc/sensu/ssl/"
   links:
     - rabbitmq
+
+multihttpcheck:
+  image: cantireinnovations/sensu-http-check:v1.0.0
+  restart: always
+  environment:
+    - CLIENT_NAME=multi-http-check
+    - RABBITMQ_HOST=rabbitmq
+    - RABBITMQ_PORT=5671
+    - RABBITMQ_VHOST=/
+    - RABBITMQ_USER=guest
+    - RABBITMQ_PASS=guest
+    - JWT_AUDIENCE=cti.iot
+    - JWT_ISSUER=cti.oauth
+    - JWT_SIGNING_KEY=CTI
+    - JWT_PAYLOAD={"uid":"http-check"}
+  volumes:
+    - "./etc/multi-http-agent/conf.d/:/etc/sensu/conf.d/"
+    - "./etc/standalone-http-agent/ssl/:/etc/sensu/ssl/"
+  links:
+    - rabbitmq
