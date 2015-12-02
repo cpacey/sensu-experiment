@@ -8,6 +8,7 @@ sensu:
     REDIS_HOST: redis
   ports:
     - "3000:3000"
+    - "3031:3031"
     - "4567:4567"
   links:
     - rabbitmq
@@ -71,7 +72,7 @@ redis:
     - "6379:6379"
 
 sensuhttpcheck:
-  image: cantireinnovations/sensu-http-check:v1.0.0
+  image: cantireinnovations/sensu-http-check:b5b311b7e3e67ee5a1919f3260f67389b08eb03e
   restart: always
   environment:
     - CLIENT_NAME=sensu-http-check
@@ -87,7 +88,7 @@ sensuhttpcheck:
     - rabbitmq
 
 multihttpcheck:
-  image: cantireinnovations/sensu-http-check:v1.0.0
+  image: cantireinnovations/sensu-http-check:b5b311b7e3e67ee5a1919f3260f67389b08eb03e
   restart: always
   environment:
     - CLIENT_NAME=multi-http-check
